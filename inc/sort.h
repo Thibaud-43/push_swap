@@ -14,6 +14,14 @@
 *	PROTOTYPES
 */
 
+void	check_order(t_list **a, t_list **b);
+void	ft_exit(t_list	*a, t_list *b);
+void	get_list_from_argv(t_list **begin, char	**tab);
+char	**get_commands_tab(void);
+void 	freeList(t_list	*begin);
+
+
+
 /* 
 *	Swap the first 2 elements at the top of stack a. 
 *	Do nothing if there is only one or no elements).

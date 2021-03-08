@@ -1,8 +1,8 @@
-SRCS			= srcs/checker.c srcs/commands.c srcs/push_swap.c
+SRCS			= srcs/checker.c srcs/commands.c srcs/push_swap.c srcs/utils.c srcs/commands2.c srcs/commands3.c
 
-OBJS_CHECKER	= srcs/checker.o srcs/commands.o
+OBJS_CHECKER	= srcs/checker.o srcs/commands.o srcs/utils.o srcs/commands2.o srcs/commands3.o
 
-OBJS_PUSHSWAP	= srcs/push_swap.o srcs/commands.o
+OBJS_PUSHSWAP	= srcs/push_swap.o srcs/commands.o srcs/utils.o srcs/commands2.o srcs/commands3.o
 
 INC			=  -I inc/ -I libft/
 
