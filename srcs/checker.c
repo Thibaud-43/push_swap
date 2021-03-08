@@ -1,5 +1,14 @@
 #include "sort.h"
 
+void	print_lists(t_list	*a, t_list	*b)
+{
+	printf("\n List A : \n");
+	ft_lstprint(a);
+	printf("\n List B : \n");
+	ft_lstprint(b);
+	printf("\n");
+}
+
 static int	apply_commands(t_list **a, t_list **b, char **commands)
 {
 	int i;
@@ -27,7 +36,7 @@ static int	apply_commands(t_list **a, t_list **b, char **commands)
 			rrr(a, b);
 		else
 		{
-			ft_putstr_fd("Error\n", 1);
+			ft_putstr_fd("Error\n", 2);
 			return (1);
 		}
 		i++;
@@ -47,12 +56,8 @@ int main(int argc, char const *argv[])
 	get_list_from_argv(&a, (char **)argv + 1);
 	if (apply_commands(&a, &b, commands))
 		ft_exit(a, b);
-	printf("\n List A : \n");
-	ft_lstprint(a);
-	printf("\n List B : \n");
-	ft_lstprint(b);
-	printf("\n");
 	check_order(&a, &b);
+	print_lists(a, b);
 	ft_exit(a, b);	
 	return 0;
 }
