@@ -9,6 +9,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <libft.h>
+#include <time.h>
+
+/*
+*   STRUCTURES
+*/
+
+typedef struct      s_stacks
+{
+    t_list      *a;
+    t_list      *b;
+}                   t_stacks;
 
 /*
 *	PROTOTYPES

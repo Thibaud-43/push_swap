@@ -4,7 +4,7 @@ OBJS_CHECKER	= srcs/checker.o srcs/commands.o srcs/utils.o srcs/commands2.o srcs
 
 OBJS_PUSHSWAP	= srcs/push_swap.o srcs/commands.o srcs/utils.o srcs/commands2.o srcs/commands3.o
 
-INC			=  -I inc/ -I libft/
+INC			=  -I inc/ -I Libft/
 
 LIBFT_DIR		= ./Libft
 
@@ -35,7 +35,7 @@ $(NAME):		$(LIBFT) $(OBJS_CHECKER) $(OBJS_PUSHSWAP)
 $(LIBFT):
 				$(MAKE) bonus -C $(LIBFT_DIR)
 clean:
-				$(MAKE) -C libft/ fclean
+				$(MAKE) -C Libft/ fclean
 				$(RM) $(OBJS_PUSHSWAP) $(OBJS_CHECKER)
 fclean:			clean
 				$(RM) $(NAME) checker 
