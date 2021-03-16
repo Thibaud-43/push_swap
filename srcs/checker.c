@@ -28,7 +28,7 @@ void    printnumber(t_list *a, t_list *b)
     }
 	a = tmpa;
 	b = tmpb;
-	usleep(500000);
+	usleep(50000);
 }
 
 
@@ -50,7 +50,7 @@ static int	apply_commands(t_list **a, t_list **b, char **commands)
 	
 	while (commands[i])
 	{
-		printnumber(*a, *b);
+		//printnumber(*a, *b);
 		if (!ft_strcmp(commands[i], "sa"))
 			sa(a, b);
 		else if (!ft_strcmp(commands[i], "sb"))

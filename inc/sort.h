@@ -30,6 +30,10 @@ void	ft_exit(t_list	*a, t_list *b);
 void	get_list_from_argv(t_list **begin, char	**tab);
 char	**get_commands_tab(void);
 void 	freeList(t_list	*begin);
+void	sort_three_elem(t_list **a, t_list **b);
+void	sort_fifty_elem(t_list **a, t_list **b);
+void	sort_infinite_elem(t_list **a, t_list **b);
+int     get_pos_min(t_list **a);
 
 
 
