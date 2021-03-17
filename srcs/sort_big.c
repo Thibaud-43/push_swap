@@ -1,155 +1,92 @@
 #include "sort.h"
 
-int     get_min(t_list **a)
+
+void    push_min_or_max_in_a(t_list **a, t_list **b, t_bigsort *bs)
 {
-    int		min;
-	int		pos_min;
-	int		pos;
-    t_list	*tmp;
-    
-    min = ft_atoi((char *)(*a)->content);
-	pos_min = 0;
-	pos = 0;
-	tmp = *a;
-	while (tmp)
-	{
-		if (ft_atoi((char *)tmp->content) < min)
-		{
-			min = ft_atoi((char *)tmp->content);
-			pos_min = pos;
-        }
-		pos++;
-		tmp = tmp->next;
-	}
-    return (min);
-}
+    int count;
 
-int     get_pos_max(t_list **a)
-{
-    int		max;
-	int		pos_max;
-	int		pos;
-    t_list	*tmp;
-    
-    max = ft_atoi((char *)(*a)->content);
-	pos_max = 0;
-	pos = 0;
-	tmp = *a;
-	while (tmp)
-	{
-		if (ft_atoi((char *)tmp->content) > max)
-		{
-			max = ft_atoi((char *)tmp->content);
-			pos_max = pos;
-        }
-		pos++;
-		tmp = tmp->next;
-	}
-    return (pos_max);
-}
-
-int     get_max(t_list **a)
-{
-    int		max;
-	int		pos_max;
-	int		pos;
-    t_list	*tmp;
-    
-    max = ft_atoi((char *)(*a)->content);
-	pos_max = 0;
-	pos = 0;
-	tmp = *a;
-	while (tmp)
-	{
-		if (ft_atoi((char *)tmp->content) > max)
-		{
-			max = ft_atoi((char *)tmp->content);
-			pos_max = pos;
-        }
-		pos++;
-		tmp = tmp->next;
-	}
-    return (max);
-}
-
-int     get_pivot(t_list **a, int step, int number_steps)
-{
-    int     min;
-    int     max;
-
-    min = get_min(a);
-    max = get_max(a);
-
-    //printf("max : %d\n", max);
-    //printf("min : %d\n", min);
-    return ((max - min) * step / number_steps + min);
-}
-
-int     get_movment(t_list **a, t_list **b)
-{
-    int len;
-    int pos_max;
-    int pos_min;
-    int ret_pos;
-    int nbr_movment1;
-    int nbr_movment2;
-    int ret1;
-    int ret2;
-
-    pos_max = get_pos_max(b);
-    pos_min =get_pos_min(b);
-    len =ft_lstsize(*b);
-    ret_pos = pos_max;
-    nbr_movment1 = len - pos_max;
-    nbr_movment2 = pos_max;
-    ret1 = 1;
-    ret2 = 2;
-    if (len - pos_min < nbr_movment1)
+    bs->len_b = ft_lstsize(*b);
+    bs->top  = 0;
+    while (bs->len_b && (*b))
     {
-        nbr_movment1 = len - pos_min;
-        ret1 = 0;
-    }
-    if (pos_min < nbr_movment2)
-    {
-        nbr_movment2 = pos_min;
-        ret2 = 0;
-    }
-    if (nbr_movment1 < nbr_movment2)
-    {
-        while (nbr_movment1--)
+        bs->len_b = ft_lstsize(*b);
+        bs->pos_max = get_pos_max(b);
+        bs->pos_min = get_pos_min(b);
+        if (bs->pos_max <= bs->pos_min)
         {
-            rrb(a, b);
-            write(1, "rrb\n", 4);
+            bs->nbr_movment = bs->pos_max;
+            bs->min_or_max = 1;
+            bs->movment_type = 0;
         }
-        pa(a, b);
-        write(1, "pa\n", 3);
-        return (ret1);
-    }
-    else
-    {
-        while (nbr_movment2--)
+        else
         {
-            rb(a, b);
-            write(1, "rb\n", 3);
+            bs->nbr_movment = bs->pos_min;
+            bs->min_or_max = 0;
+            bs->movment_type = 0;
         }
-        pa(a, b);
-        write(1, "pa\n", 3);
-        return (ret2);
+        if (bs->nbr_movment > bs->len_b - bs->pos_max | bs->nbr_movment > bs->len_b - bs->pos_min)
+        {
+            if (bs->len_b - bs->pos_max <= bs->len_b - bs->pos_min)
+            {
+                bs->nbr_movment = bs->len_b - bs->pos_max;
+                bs->min_or_max = 1;
+                bs->movment_type = 1;
+            }
+            else
+            {
+                bs->nbr_movment = bs->len_b - bs->pos_min;
+                bs->min_or_max = 0;
+                bs->movment_type = 1;
+            }
+        }
+        if (bs->movment_type == 1)
+        {
+            while (bs->nbr_movment--)
+            {
+                rrb(a, b);
+                write(1, "rrb\n", 4);
+            }
+        }
+        else
+        {
+            while (bs->nbr_movment--)
+            {
+                rb(a, b);
+                write(1, "rb\n", 3);
+            }
+        }
+        if (bs->min_or_max)
+        {
+            pa(a, b);
+            write(1, "pa\n", 3);
+            bs->top++;
+        }
+        else
+        {
+            pa(a, b);
+            write(1, "pa\n", 3);
+            ra(a, b);
+            write(1, "ra\n", 3);
+        }
     }
+    while (bs->top--)
+    {
+        ra(a, b);
+        write(1, "ra\n", 3);
+    }
+    
 }
 
-void    sort_sample(t_list **a, t_list **b, int pivot)
+void    push_under_pivot_in_b(t_list **a, t_list **b, t_bigsort *bs)
 {
-    int     len;
-    int     index_to_push;
-    int     nbr_movment;
-    t_list  *tmp;
+    int     count;
+    int     count2;
 
-    len = ft_lstsize(*a);
-    while (len--)
+    count = bs->cursor_max;
+    count2 = 0;
+    while (count--)
     {
-        tmp = *a;
-        if (ft_atoi((char *)tmp->content) < pivot)
+        if (ft_atoi((char *)(*a)->content) <= bs->pivot)
         {
             pb(a, b);
             write(1, "pb\n", 3);
@@ -158,38 +95,33 @@ void    sort_sample(t_list **a, t_list **b, int pivot)
         {
             ra(a, b);
             write(1, "ra\n", 3);
+            count2++;
         }
     }
-
-    len = ft_lstsize(*b);
-    while (len--)
+    while (count2--)
     {
-        tmp = *b;
-        if (get_movment(a, b) == 0)
-        {
-            ra(a, b);
-            write(1, "ra\n", 3);
-        }
+        rra(a, b);
+        write(1, "rra\n", 4);
     }
+    bs->cursor_max -= ft_lstsize(*b);
 }
 
 void	sort_infinite_elem(t_list **a, t_list **b)
 {
-    int     len;
-    int     pivot;
-    int     number_steps;
-    int     step;
+    t_bigsort   bs;
 
-    len = ft_lstsize(*a);
-    step = 0;
-    number_steps = len / 50;
-    if (number_steps * 50 != len)
-        number_steps++;
-    while (step++ < number_steps)
+    bs.len_a = ft_lstsize(*a);
+    bs.step = 0;
+    bs.number_steps = bs.len_a / 100;
+    bs.cursor_min = 0;
+    bs.cursor_max = bs.len_a;
+    if (bs.number_steps * 100 != bs.len_a)
+        bs.number_steps++;
+    while (bs.step++ < bs.number_steps)
     {
-        pivot = get_pivot(a, step, number_steps);
-        //printf("pivot : %d\n", pivot);
-        sort_sample(a, b, pivot);                                                                                                                                                                                                         
+        get_pivot(a, &bs);
+        //printf("cursor max : %d\n", bs.cursor_max); 
+        push_under_pivot_in_b(a, b, &bs);
+        push_min_or_max_in_a(a, b, &bs);                                                                                                                                                                               
     }
-
 }

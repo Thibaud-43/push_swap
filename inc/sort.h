@@ -21,6 +21,25 @@ typedef struct      s_stacks
     t_list      *b;
 }                   t_stacks;
 
+typedef	struct 		s_bigsort
+{
+	int		len_a;
+	int		len_b;
+	int		pivot;
+	int		cursor_min;
+	int		cursor_max;
+	int		step;
+	int 	number_steps;
+	int		pos_min;
+	int		pos_max;
+	int		nbr_movment;
+	int		min_or_max;
+	int		movment_type;
+	int		top;	
+
+}					t_bigsort;
+
+
 /*
 *	PROTOTYPES
 */
@@ -34,7 +53,10 @@ void	sort_three_elem(t_list **a, t_list **b);
 void	sort_fifty_elem(t_list **a, t_list **b);
 void	sort_infinite_elem(t_list **a, t_list **b);
 int     get_pos_min(t_list **a);
-
+int     get_pos_max(t_list **a);
+int     get_min(t_list **a, int count);
+int     get_max(t_list **a, int count);
+void    get_pivot(t_list **a, t_bigsort *bs);
 
 
 /* 

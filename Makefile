@@ -1,8 +1,8 @@
-SRCS			= srcs/checker.c srcs/commands.c srcs/push_swap.c srcs/utils.c srcs/commands2.c srcs/commands3.c srcs/sort_small.c srcs/sort_medium.c srcs/sort_big.c
+SRCS			= srcs/checker.c srcs/commands.c srcs/push_swap.c srcs/utils.c srcs/commands2.c srcs/commands3.c srcs/sort_small.c srcs/sort_medium.c srcs/sort_big.c srcs/getters.c
 
 OBJS_CHECKER	= srcs/checker.o srcs/commands.o srcs/utils.o srcs/commands2.o srcs/commands3.o
 
-OBJS_PUSHSWAP	= srcs/push_swap.o srcs/commands.o srcs/utils.o srcs/commands2.o srcs/commands3.o srcs/sort_small.o srcs/sort_medium.o srcs/sort_big.o
+OBJS_PUSHSWAP	= srcs/push_swap.o srcs/commands.o srcs/utils.o srcs/commands2.o srcs/commands3.o srcs/sort_small.o srcs/sort_medium.o srcs/sort_big.o srcs/getters.o
 
 INC			=  -I inc/ -I Libft/
 

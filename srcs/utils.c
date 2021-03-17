@@ -7,7 +7,9 @@ void	check_order(t_list **a, t_list **b)
 	tmp = *a;
 	if (*b)
 	{
-		ft_putstr_fd("KO\n", 1);
+		ft_putstr_fd("\033[0;31m", 1);
+		ft_putstr_fd("\n\n      RESULT |   KO\n", 1);
+		ft_putstr_fd("\033[0m", 1);
 		return ;
 	}
 		
@@ -15,12 +17,16 @@ void	check_order(t_list **a, t_list **b)
 	{
 		if (ft_atoi((*tmp).content) > ft_atoi((*tmp).next->content))
 		{
-			ft_putstr_fd("KO\n", 1);
+			ft_putstr_fd("\033[0;31m", 1);
+			ft_putstr_fd("\n\n      RESULT |   KO\n", 1);
+			ft_putstr_fd("\033[0m", 1);
 			return ;
 		}
 		tmp = tmp->next;
 	}
-	ft_putstr_fd("OK\n", 1);
+	ft_putstr_fd("\033[1;32m", 1);
+	ft_putstr_fd("\n\n      RESULT |   OK\n", 1);
+	ft_putstr_fd("\033[0m", 1);
 }
 
 void	ft_exit(t_list	*a, t_list *b)

@@ -1,29 +1,5 @@
 #include "sort.h"
 
-int     get_pos_min(t_list **a)
-{
-    int		min;
-	int		pos_min;
-	int		pos;
-    t_list	*tmp;
-    
-    min = ft_atoi((char *)(*a)->content);
-	pos_min = 0;
-	pos = 0;
-	tmp = *a;
-	while (tmp)
-	{
-		if (ft_atoi((char *)tmp->content) < min)
-		{
-			min = ft_atoi((char *)tmp->content);
-			pos_min = pos;
-        }
-		pos++;
-		tmp = tmp->next;
-	}
-    return (pos_min);
-}
-
 void    place_min_top(t_list **a, t_list **b, int pos_min)
 {
     if (pos_min <= ft_lstsize(*a) / 2)
