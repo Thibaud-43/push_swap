@@ -112,15 +112,14 @@ void	sort_infinite_elem(t_list **a, t_list **b)
 
     bs.len_a = ft_lstsize(*a);
     bs.step = 0;
-    bs.number_steps = bs.len_a / 100;
+    bs.number_steps = bs.len_a / 50;
     bs.cursor_min = 0;
     bs.cursor_max = bs.len_a;
-    if (bs.number_steps * 100 != bs.len_a)
+    if (bs.number_steps * 50 != bs.len_a)
         bs.number_steps++;
     while (bs.step++ < bs.number_steps)
     {
         get_pivot(a, &bs);
-        //printf("cursor max : %d\n", bs.cursor_max); 
         push_under_pivot_in_b(a, b, &bs);
         push_min_or_max_in_a(a, b, &bs);                                                                                                                                                                               
     }

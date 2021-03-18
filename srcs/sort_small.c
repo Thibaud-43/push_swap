@@ -26,6 +26,10 @@ void	sort_three_elem(t_list **a, t_list **b)
 		ra(a, b);
 		write(1, "ra\n", 3);
 	}
+	else if (ft_atoi((char*)(*a)->content) < ft_atoi((char*)(*a)->next->content) && ft_atoi((char*)(*a)->content) < ft_atoi((char*)(*a)->next->next->content) && ft_atoi((char*)(*a)->next->content) < ft_atoi((char*)(*a)->next->next->content))
+	{
+		
+	}
 	else
 	{
 		rra(a, b);

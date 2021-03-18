@@ -1,32 +1,28 @@
 #include "sort.h"
 
-void	check_order(t_list **a, t_list **b)
+int	ft_check_digits(char **argv)
 {
-	t_list	*tmp;
+	int i;
+	int k;
 
-	tmp = *a;
-	if (*b)
+	i = 0;
+	k = 0;
+ 	if (!argv || ft_strcmp(argv[i], "") == 0)
+		return (1);
+	while (argv[i])
 	{
-		ft_putstr_fd("\033[0;31m", 1);
-		ft_putstr_fd("\n\n      RESULT |   KO\n", 1);
-		ft_putstr_fd("\033[0m", 1);
-		return ;
-	}
-		
-	while ((*tmp).next)
-	{
-		if (ft_atoi((*tmp).content) > ft_atoi((*tmp).next->content))
+		k = 0;
+		if ((ft_atoi((argv[i])) == -1 && ft_strcmp(argv[i], "-1") != 0) || (ft_atoi((argv[i])) == -2 && ft_strcmp(argv[i], "-2") != 0))
+			return (1);
+		while (argv[i][k])
 		{
-			ft_putstr_fd("\033[0;31m", 1);
-			ft_putstr_fd("\n\n      RESULT |   KO\n", 1);
-			ft_putstr_fd("\033[0m", 1);
-			return ;
+			if (ft_isdigit(argv[i][k]) == 0 && argv[i][k] != '-')
+				return (1);
+			k++;
 		}
-		tmp = tmp->next;
+		i++;
 	}
-	ft_putstr_fd("\033[1;32m", 1);
-	ft_putstr_fd("\n\n      RESULT |   OK\n", 1);
-	ft_putstr_fd("\033[0m", 1);
+	return (0);
 }
 
 void	ft_exit(t_list	*a, t_list *b)

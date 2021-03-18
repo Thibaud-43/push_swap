@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <libft.h>
 #include <time.h>
+#include <limits.h>
 
 /*
 *   STRUCTURES
@@ -57,6 +58,8 @@ int     get_pos_max(t_list **a);
 int     get_min(t_list **a, int count);
 int     get_max(t_list **a, int count);
 void    get_pivot(t_list **a, t_bigsort *bs);
+int		ft_check_digits(char **argv);
+int		check_double(t_list **a);
 
 
 /* 
