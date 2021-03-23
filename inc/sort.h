@@ -48,7 +48,7 @@ typedef	struct		s_bigsort
 }					t_bigsort;
 
 void				check_order(t_list **a, t_list **b);
-void				ft_exit(t_list	*a, t_list *b);
+void				ft_exit(t_list	*a, t_list *b, char **commands);
 void				get_list_from_argv(t_list **begin, char	**tab);
 char				**get_commands_tab(void);
 void				freelist(t_list *begin);
@@ -74,5 +74,6 @@ void				rrb(t_list **a, t_list **b);
 void				rrr(t_list **a, t_list **b);
 void				printnumber(char *str, t_list *a, t_list *b);
 void				push_min_or_max_in_a(t_list **a, t_list **b, t_bigsort *bs);
+int					ft_error(void);
 
 #endif

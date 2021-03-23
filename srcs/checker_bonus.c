@@ -86,6 +86,11 @@ static int		apply_commands2(t_list **a, t_list **b, char **commands, int i)
 		rrr(a, b);
 		printnumber("rrr", *a, *b);
 	}
+	else if (!ft_strcmp(commands[i], "rr"))
+	{
+		rr(a, b);
+		printnumber("rr", *a, *b);
+	}
 	usleep(500000);
 	return (0);
 }
@@ -120,10 +125,7 @@ int				main(int argc, char const *argv[])
 	a = NULL;
 	b = NULL;
 	if (ft_check_digits((char **)argv + 1) || argc < 2)
-	{
-		ft_putstr_fd("Error\n", 1);
 		return (1);
-	}
 	commands = get_commands_tab();
 	get_list_from_argv(&a, (char **)argv + 1);
 	if (check_double(&a))

@@ -12,6 +12,12 @@
 
 #include "sort.h"
 
+int			ft_error(void)
+{
+	ft_putstr_fd("Error\n", 1);
+	return (1);
+}
+
 void		ft_init_tab(int *tab, int size)
 {
 	int i;

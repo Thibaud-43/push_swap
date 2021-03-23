@@ -26,11 +26,11 @@ int				ft_check_digits(char **argv)
 		k = 0;
 		if ((ft_atoi((argv[i])) == -1 && ft_strcmp(argv[i], "-1") != 0)
 		|| (ft_atoi((argv[i])) == -2 && ft_strcmp(argv[i], "-2") != 0))
-			return (1);
+			return ft_error();
 		while (argv[i][k])
 		{
 			if (ft_isdigit(argv[i][k]) == 0 && argv[i][k] != '-')
-				return (1);
+				return ft_error();
 			k++;
 		}
 		i++;
@@ -38,11 +38,17 @@ int				ft_check_digits(char **argv)
 	return (0);
 }
 
-void			ft_exit(t_list *a, t_list *b)
+void			ft_exit(t_list *a, t_list *b, char **commands)
 {
+	int i;
+	i = 0;
+
+	while (commands[i])
+		free(commands[i++]);
+	free(commands);
 	freelist(a);
 	freelist(b);
-	exit(0);
+	exit(1);
 }
 
 char			**get_commands_tab(void)
@@ -61,10 +67,11 @@ char			**get_commands_tab(void)
 		free(tmp);
 		free(line);
 		tmp = commands;
-		commands = ft_strjoin(tmp, " ");
+		commands = ft_strjoin(tmp, "-");
 		free(tmp);
 	}
-	commands_tab = ft_split(commands, ' ');
+	free(line);
+	commands_tab = ft_split(commands, '-');
 	free(commands);
 	return (commands_tab);
 }

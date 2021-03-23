@@ -48,6 +48,8 @@ static int	apply_commands2(t_list **a, t_list **b, char **commands, int i)
 		ra(a, b);
 	else if (!ft_strcmp(commands[i], "rb"))
 		rb(a, b);
+	else if (!ft_strcmp(commands[i], "rr"))
+		rr(a, b);
 	else if (!ft_strcmp(commands[i], "rra"))
 		rra(a, b);
 	else if (!ft_strcmp(commands[i], "rrb"))
@@ -72,6 +74,8 @@ static int	apply_commands(t_list **a, t_list **b, char **commands)
 	while (commands[i])
 	{
 		ret = apply_commands2(a, b, commands, i);
+		if (ret)
+			return (ret);
 		i++;
 	}
 	return (ret);
@@ -86,20 +90,17 @@ int			main(int argc, char const *argv[])
 	a = NULL;
 	b = NULL;
 	if (ft_check_digits((char **)argv + 1) || argc < 2)
-	{
-		ft_putstr_fd("Error\n", 1);
 		return (1);
-	}
 	commands = get_commands_tab();
 	get_list_from_argv(&a, (char **)argv + 1);
 	if (check_double(&a))
 	{
 		ft_putstr_fd("Error\n", 1);
-		ft_exit(a, b);
+		ft_exit(a, b, commands);
 	}
 	if (apply_commands(&a, &b, commands))
-		ft_exit(a, b);
+		ft_exit(a, b, commands);
 	check_order(&a, &b);
-	ft_exit(a, b);
+	ft_exit(a, b, commands);
 	return (0);
 }

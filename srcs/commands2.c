@@ -17,7 +17,7 @@ void	ra(t_list **a, t_list **b)
 	t_list	*tmp;
 	t_list	*tmp2;
 
-	if (!(*a) && (*a)->next)
+	if (!(*a) || !(*a)->next)
 		return ;
 	tmp = (*a);
 	tmp2 = (*a);
@@ -34,7 +34,7 @@ void	rb(t_list **a, t_list **b)
 	t_list	*tmp;
 	t_list	*tmp2;
 
-	if (!(*b) && (*b)->next)
+	if (!(*b) || !(*b)->next)
 		return ;
 	tmp = (*b);
 	tmp2 = (*b);
