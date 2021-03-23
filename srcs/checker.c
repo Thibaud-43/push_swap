@@ -42,6 +42,8 @@ static int	apply_commands2(t_list **a, t_list **b, char **commands, int i)
 		sb(a, b);
 	else if (!ft_strcmp(commands[i], "pa"))
 		pa(a, b);
+	else if (!ft_strcmp(commands[i], "pb"))
+		pb(a, b);
 	else if (!ft_strcmp(commands[i], "ra"))
 		ra(a, b);
 	else if (!ft_strcmp(commands[i], "rb"))

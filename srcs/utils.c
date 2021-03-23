@@ -19,7 +19,7 @@ int				ft_check_digits(char **argv)
 
 	i = 0;
 	k = 0;
-	if (!argv || ft_strcmp(argv[i], "") == 0)
+	if (!argv[i] || ft_strcmp(argv[i], "") == 0)
 		return (1);
 	while (argv[i])
 	{

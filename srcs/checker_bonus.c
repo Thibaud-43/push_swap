@@ -119,7 +119,7 @@ int				main(int argc, char const *argv[])
 
 	a = NULL;
 	b = NULL;
-	if (ft_check_digits((char **)argv + 1))
+	if (ft_check_digits((char **)argv + 1) || argc < 2)
 	{
 		ft_putstr_fd("Error\n", 1);
 		return (1);
