@@ -1,18 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trouchon <trouchon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/11 12:27:36 by trouchon          #+#    #+#             */
+/*   Updated: 2021/01/27 13:57:42 by trouchon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "sort.h"
 
-int	ft_check_digits(char **argv)
+int				ft_check_digits(char **argv)
 {
 	int i;
 	int k;
 
 	i = 0;
 	k = 0;
- 	if (!argv || ft_strcmp(argv[i], "") == 0)
+	if (!argv || ft_strcmp(argv[i], "") == 0)
 		return (1);
 	while (argv[i])
 	{
 		k = 0;
-		if ((ft_atoi((argv[i])) == -1 && ft_strcmp(argv[i], "-1") != 0) || (ft_atoi((argv[i])) == -2 && ft_strcmp(argv[i], "-2") != 0))
+		if ((ft_atoi((argv[i])) == -1 && ft_strcmp(argv[i], "-1") != 0)
+		|| (ft_atoi((argv[i])) == -2 && ft_strcmp(argv[i], "-2") != 0))
 			return (1);
 		while (argv[i][k])
 		{
@@ -25,23 +38,23 @@ int	ft_check_digits(char **argv)
 	return (0);
 }
 
-void	ft_exit(t_list	*a, t_list *b)
+void			ft_exit(t_list *a, t_list *b)
 {
-	freeList(a);
-	freeList(b);
+	freelist(a);
+	freelist(b);
 	exit(0);
 }
 
-char	**get_commands_tab(void)
+char			**get_commands_tab(void)
 {
-	char 	*line;
-	char 	*commands;
+	char	*line;
+	char	*commands;
 	char	*tmp;
-	int 	ret;
+	int		ret;
 	char	**commands_tab;
 
 	commands = ft_calloc(sizeof(char), 1);
-	while((ret = get_next_line(0, &line)))
+	while ((ret = get_next_line(0, &line)))
 	{
 		tmp = commands;
 		commands = ft_strjoin(tmp, line);
@@ -56,7 +69,7 @@ char	**get_commands_tab(void)
 	return (commands_tab);
 }
 
-void	get_list_from_argv(t_list **begin, char	**tab)
+void			get_list_from_argv(t_list **begin, char **tab)
 {
 	int i;
 
@@ -69,14 +82,14 @@ void	get_list_from_argv(t_list **begin, char	**tab)
 	return ;
 }
 
-void freeList(t_list	*begin)
+void			freelist(t_list *begin)
 {
-   t_list	*tmp;
+	t_list	*tmp;
 
-   while (begin != NULL)
-    {
-       tmp = begin;
-       begin = begin->next;
-       free(tmp);
-    }
+	while (begin != NULL)
+	{
+		tmp = begin;
+		begin = begin->next;
+		free(tmp);
+	}
 }

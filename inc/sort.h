@@ -1,131 +1,78 @@
-# ifndef SORT_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trouchon <trouchon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/11 12:27:36 by trouchon          #+#    #+#             */
+/*   Updated: 2021/01/27 13:57:42 by trouchon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SORT_H
 # define SORT_H
 
-/*
-*	LIBRARIES
-*/
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <libft.h>
+# include <time.h>
+# include <limits.h>
+# define ELEM1 ft_atoi((char*)(*a)->content)
+# define ELEM2 ft_atoi((char*)(*a)->next->content)
+# define ELEM3 ft_atoi((char*)(*a)->next->next->content)
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <libft.h>
-#include <time.h>
-#include <limits.h>
 
-/*
-*   STRUCTURES
-*/
-
-typedef struct      s_stacks
+typedef struct		s_stacks
 {
-    t_list      *a;
-    t_list      *b;
-}                   t_stacks;
+	t_list			*a;
+	t_list			*b;
+}					t_stacks;
 
-typedef	struct 		s_bigsort
+typedef	struct		s_bigsort
 {
-	int		len_a;
-	int		len_b;
-	int		pivot;
-	int		cursor_min;
-	int		cursor_max;
-	int		step;
-	int 	number_steps;
-	int		pos_min;
-	int		pos_max;
-	int		nbr_movment;
-	int		min_or_max;
-	int		movment_type;
-	int		top;	
-
+	int				len_a;
+	int				len_b;
+	int				pivot;
+	int				cursor_min;
+	int				cursor_max;
+	int				step;
+	int				number_steps;
+	int				pos_min;
+	int				pos_max;
+	int				nbr_movment;
+	int				min_or_max;
+	int				movment_type;
+	int				top;
 }					t_bigsort;
 
-
-/*
-*	PROTOTYPES
-*/
-
-void	check_order(t_list **a, t_list **b);
-void	ft_exit(t_list	*a, t_list *b);
-void	get_list_from_argv(t_list **begin, char	**tab);
-char	**get_commands_tab(void);
-void 	freeList(t_list	*begin);
-void	sort_three_elem(t_list **a, t_list **b);
-void	sort_fifty_elem(t_list **a, t_list **b);
-void	sort_infinite_elem(t_list **a, t_list **b);
-int     get_pos_min(t_list **a);
-int     get_pos_max(t_list **a);
-int     get_min(t_list **a, int count);
-int     get_max(t_list **a, int count);
-void    get_pivot(t_list **a, t_bigsort *bs);
-int		ft_check_digits(char **argv);
-int		check_double(t_list **a);
-
-
-/* 
-*	Swap the first 2 elements at the top of stack a. 
-*	Do nothing if there is only one or no elements).
-*/
-void	sa(t_list **a, t_list **b);
-
-
-/* 
-*	Swap the first 2 elements at the top of stack b. 
-*	Do nothing if there is only one or no elements).
-*/
-void	sb(t_list **a, t_list **b);
-
-
-/* 
-* 	Push a - take the first element at the top of b and put it at the top of a. 
-* 	Do nothing if b is empty
-*/
-void	pa(t_list **a, t_list **b);
-
-
-/*
-*	push b - take the first element at the top of a and put it at the top of b.
-*	Do nothing if a is empty
-*/
-void	pb(t_list **a, t_list **b);
-
-
-/*
-*	rotate a - shift up all elements of stack a by 1.
-*	The first element becomes the last one.
-*/
-void	ra(t_list **a, t_list **b);
-
-
-/*
-*	Rotate b - shift up all elements of stack b by 1. 
-*	The first element becomes the last one.
-*/
-void	rb(t_list **a, t_list **b);
-
-
-/* 
-*	ra and rb at the same time.
-*/
-void	rr(t_list **a, t_list **b);
-
-
-/*
-*	Reverse rotate a - shift down all elements of stack a by 1.
-*	The last element becomes the first one.
-*/
-void	rra(t_list **a, t_list **b);
-
-/*
-*	Reverse rotate b - shift down all elements of stack b by 1.
-*	The last element becomes the first one.
-*/
-void	rrb(t_list **a, t_list **b);
-
-
-/*
-*	 rra and rrb at the same time.
-*/
-void	rrr(t_list **a, t_list **b);
+void				check_order(t_list **a, t_list **b);
+void				ft_exit(t_list	*a, t_list *b);
+void				get_list_from_argv(t_list **begin, char	**tab);
+char				**get_commands_tab(void);
+void				freelist(t_list *begin);
+void				sort_three_elem(t_list **a, t_list **b);
+void				sort_fifty_elem(t_list **a, t_list **b);
+void				sort_infinite_elem(t_list **a, t_list **b);
+int					get_pos_min(t_list **a);
+int					get_pos_max(t_list **a);
+int					get_min(t_list **a, int count);
+int					get_max(t_list **a, int count);
+void				get_pivot(t_list **a, t_bigsort *bs);
+int					ft_check_digits(char **argv);
+int					check_double(t_list **a);
+void				sa(t_list **a, t_list **b);
+void				sb(t_list **a, t_list **b);
+void				pa(t_list **a, t_list **b);
+void				pb(t_list **a, t_list **b);
+void				ra(t_list **a, t_list **b);
+void				rb(t_list **a, t_list **b);
+void				rr(t_list **a, t_list **b);
+void				rra(t_list **a, t_list **b);
+void				rrb(t_list **a, t_list **b);
+void				rrr(t_list **a, t_list **b);
+void				printnumber(char *str, t_list *a, t_list *b);
+void				push_min_or_max_in_a(t_list **a, t_list **b, t_bigsort *bs);
 
 #endif
