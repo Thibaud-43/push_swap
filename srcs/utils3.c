@@ -39,3 +39,19 @@ void		printnumber2(char *str, t_list *a, t_list *b, t_flags *flags)
 		printf("\n");
 	}
 }
+
+int			check_order2(t_list **a, t_list **b)
+{
+	t_list	*tmp;
+
+	tmp = *a;
+	if (*b)
+		return (0);
+	while ((*tmp).next)
+	{
+		if (ft_atoi((*tmp).content) > ft_atoi((*tmp).next->content))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}

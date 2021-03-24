@@ -17,11 +17,16 @@ void	ft_sort_list(t_list **a, t_list **b, t_flags *flags)
 	int		size;
 
 	size = ft_lstsize(*a);
-	if (size == 2 && (ft_atoi((char *)(*a)->content) >
-	ft_atoi((char *)(*a)->next->content)))
+	if (size < 2)
+		return ;
+	else if (size == 2)
 	{
-		sa(a, b);
-		write(flags->file_redir_dst, "sa\n", 3);
+		if (ft_atoi((char *)(*a)->content) >
+		ft_atoi((char *)(*a)->next->content))
+		{
+			sa(a, b);
+			write(flags->file_redir_dst, "sa\n", 3);
+		}
 	}
 	else if (size == 3)
 		sort_three_elem(a, b, flags);
@@ -51,7 +56,8 @@ int		main(int argc, char const *argv[])
 		ft_putstr_fd("Error\n", 2);
 		ft_exit(a, b, commands, &flags);
 	}
-	ft_sort_list(&a, &b, &flags);
+	if (!check_order2(&a, &b))
+		ft_sort_list(&a, &b, &flags);
 	ft_exit(a, b, commands, &flags);
 	return (0);
 }
