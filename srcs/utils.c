@@ -26,11 +26,11 @@ int				ft_check_digits(char **argv)
 		k = 0;
 		if ((ft_atoi((argv[i])) == -1 && ft_strcmp(argv[i], "-1") != 0)
 		|| (ft_atoi((argv[i])) == -2 && ft_strcmp(argv[i], "-2") != 0))
-			return ft_error();
+			return (ft_error());
 		while (argv[i][k])
 		{
 			if (ft_isdigit(argv[i][k]) == 0 && argv[i][k] != '-')
-				return ft_error();
+				return (ft_error());
 			k++;
 		}
 		i++;
@@ -41,8 +41,8 @@ int				ft_check_digits(char **argv)
 void			ft_exit(t_list *a, t_list *b, char **commands, t_flags *flags)
 {
 	int i;
-	i = 0;
 
+	i = 0;
 	if (flags->file_redir_dst > 1)
 		close(flags->file_redir_dst);
 	if (flags->file_redir_src > 1)
@@ -52,7 +52,7 @@ void			ft_exit(t_list *a, t_list *b, char **commands, t_flags *flags)
 		while (commands[i])
 			free(commands[i++]);
 		free(commands);
-	}	
+	}
 	freelist(a);
 	freelist(b);
 	exit(1);

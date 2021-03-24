@@ -12,7 +12,8 @@
 
 #include "sort.h"
 
-void		push_under_pivot_in_b(t_list **a, t_list **b, t_bigsort *bs, t_flags *flags)
+void		push_under_pivot_in_b(t_list **a, t_list **b,
+t_bigsort *bs, t_flags *flags)
 {
 	int		count;
 	int		count2;
@@ -47,10 +48,10 @@ void		sort_infinite_elem(t_list **a, t_list **b, t_flags *flags)
 
 	bs.len_a = ft_lstsize(*a);
 	bs.step = 0;
-	bs.number_steps = bs.len_a / 50;
+	bs.number_steps = bs.len_a / 80;
 	bs.cursor_min = 0;
 	bs.cursor_max = bs.len_a;
-	if (bs.number_steps * 50 != bs.len_a)
+	if (bs.number_steps * 80 != bs.len_a)
 		bs.number_steps++;
 	while (bs.step++ < bs.number_steps)
 	{

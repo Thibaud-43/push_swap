@@ -21,8 +21,7 @@ void			check_order(t_list **a, t_list **b, t_flags *flags)
 	{
 		if (flags->color)
 			ft_putstr_fd("\033[0;31m", 1);
-		ft_putstr_fd("KO\n", 1);
-		ft_putstr_fd("\033[0m", 1);
+		ft_putstr_fd("KO\n\033[0m", 1);
 		return ;
 	}
 	while ((*tmp).next)
@@ -39,11 +38,11 @@ void			check_order(t_list **a, t_list **b, t_flags *flags)
 	}
 	if (flags->color)
 		ft_putstr_fd("\033[1;32m", 1);
-	ft_putstr_fd("OK\n", 1);
-	ft_putstr_fd("\033[0m", 1);
+	ft_putstr_fd("OK\n\033[0m", 1);
 }
 
-static void		apply_commands3(t_stacks *s, char **commands, int i, t_flags *flags)
+static void		apply_commands3(t_stacks *s, char **commands,
+int i, t_flags *flags)
 {
 	if (!ft_strcmp(commands[i], "sb"))
 	{
@@ -72,7 +71,8 @@ static void		apply_commands3(t_stacks *s, char **commands, int i, t_flags *flags
 	}
 }
 
-static int		apply_commands2(t_stacks *s, char **commands, int i, t_flags *flags)
+static int		apply_commands2(t_stacks *s, char **commands,
+int i, t_flags *flags)
 {
 	if (!ft_strcmp(commands[i], "rra"))
 	{
