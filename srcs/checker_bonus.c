@@ -131,11 +131,11 @@ int				main(int argc, char const *argv[])
 	if (check_double(&a))
 	{
 		ft_putstr_fd("Error\n", 1);
-		ft_exit(a, b);
+		ft_exit(a, b, commands);
 	}
 	if (apply_commands(&a, &b, commands))
-		ft_exit(a, b);
+		ft_exit(a, b, commands);
 	check_order(&a, &b);
-	ft_exit(a, b);
+	ft_exit(a, b, commands);
 	return (0);
 }

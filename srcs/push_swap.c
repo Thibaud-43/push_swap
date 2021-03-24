@@ -45,9 +45,9 @@ int		main(int argc, char const *argv[])
 	if (check_double(&a))
 	{
 		ft_putstr_fd("Error\n", 2);
-		ft_exit(a, b);
+		ft_exit(a, b, commands);
 	}
 	ft_sort_list(&a, &b);
-	ft_exit(a, b);
+	ft_exit(a, b, commands);
 	return (0);
 }
