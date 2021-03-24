@@ -12,7 +12,7 @@
 
 #include "sort.h"
 
-void		push_under_pivot_in_b(t_list **a, t_list **b, t_bigsort *bs)
+void		push_under_pivot_in_b(t_list **a, t_list **b, t_bigsort *bs, t_flags *flags)
 {
 	int		count;
 	int		count2;
@@ -24,24 +24,24 @@ void		push_under_pivot_in_b(t_list **a, t_list **b, t_bigsort *bs)
 		if (ft_atoi((char *)(*a)->content) <= bs->pivot)
 		{
 			pb(a, b);
-			write(1, "pb\n", 3);
+			write(flags->file_redir_dst, "pb\n", 3);
 		}
 		else
 		{
 			ra(a, b);
-			write(1, "ra\n", 3);
+			write(flags->file_redir_dst, "ra\n", 3);
 			count2++;
 		}
 	}
 	while (count2--)
 	{
 		rra(a, b);
-		write(1, "rra\n", 4);
+		write(flags->file_redir_dst, "rra\n", 4);
 	}
 	bs->cursor_max -= ft_lstsize(*b);
 }
 
-void		sort_infinite_elem(t_list **a, t_list **b)
+void		sort_infinite_elem(t_list **a, t_list **b, t_flags *flags)
 {
 	t_bigsort	bs;
 
@@ -55,7 +55,7 @@ void		sort_infinite_elem(t_list **a, t_list **b)
 	while (bs.step++ < bs.number_steps)
 	{
 		get_pivot(a, &bs);
-		push_under_pivot_in_b(a, b, &bs);
-		push_min_or_max_in_a(a, b, &bs);
+		push_under_pivot_in_b(a, b, &bs, flags);
+		push_min_or_max_in_a(a, b, &bs, flags);
 	}
 }

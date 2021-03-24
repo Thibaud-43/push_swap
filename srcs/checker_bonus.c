@@ -12,15 +12,16 @@
 
 #include "sort.h"
 
-void			check_order(t_list **a, t_list **b)
+void			check_order(t_list **a, t_list **b, t_flags *flags)
 {
 	t_list	*tmp;
 
 	tmp = *a;
 	if (*b)
 	{
-		ft_putstr_fd("\033[0;31m", 1);
-		ft_putstr_fd("\n\n      RESULT |   KO\n", 1);
+		if (flags->color)
+			ft_putstr_fd("\033[0;31m", 1);
+		ft_putstr_fd("KO\n", 1);
 		ft_putstr_fd("\033[0m", 1);
 		return ;
 	}
@@ -28,74 +29,75 @@ void			check_order(t_list **a, t_list **b)
 	{
 		if (ft_atoi((*tmp).content) > ft_atoi((*tmp).next->content))
 		{
-			ft_putstr_fd("\033[0;31m", 1);
-			ft_putstr_fd("\n\n      RESULT |   KO\n", 1);
+			if (flags->color)
+				ft_putstr_fd("\033[0;31m", 1);
+			ft_putstr_fd("KO\n", 1);
 			ft_putstr_fd("\033[0m", 1);
 			return ;
 		}
 		tmp = tmp->next;
 	}
-	ft_putstr_fd("\033[1;32m", 1);
-	ft_putstr_fd("\n\n      RESULT |   OK\n", 1);
+	if (flags->color)
+		ft_putstr_fd("\033[1;32m", 1);
+	ft_putstr_fd("OK\n", 1);
 	ft_putstr_fd("\033[0m", 1);
 }
 
-static void		apply_commands3(t_list **a, t_list **b, char **commands, int i)
+static void		apply_commands3(t_stacks *s, char **commands, int i, t_flags *flags)
 {
 	if (!ft_strcmp(commands[i], "sb"))
 	{
-		sb(a, b);
-		printnumber("sb", *a, *b);
+		sb(&(s->a), &(s->b));
+		printnumber("sb", (s->a), (s->b), flags);
 	}
 	else if (!ft_strcmp(commands[i], "pa"))
 	{
-		pa(a, b);
-		printnumber("pa", *a, *b);
+		pa(&(s->a), &(s->b));
+		printnumber("pa", (s->a), (s->b), flags);
 	}
 	else if (!ft_strcmp(commands[i], "pb"))
 	{
-		pb(a, b);
-		printnumber("pb", *a, *b);
+		pb(&(s->a), &(s->b));
+		printnumber("pb", (s->a), (s->b), flags);
 	}
 	else if (!ft_strcmp(commands[i], "ra"))
 	{
-		ra(a, b);
-		printnumber("ra", *a, *b);
+		ra(&(s->a), &(s->b));
+		printnumber("ra", (s->a), (s->b), flags);
 	}
 	else if (!ft_strcmp(commands[i], "rb"))
 	{
-		rb(a, b);
-		printnumber("rb", *a, *b);
+		rb(&(s->a), &(s->b));
+		printnumber("rb", (s->a), (s->b), flags);
 	}
 }
 
-static int		apply_commands2(t_list **a, t_list **b, char **commands, int i)
+static int		apply_commands2(t_stacks *s, char **commands, int i, t_flags *flags)
 {
 	if (!ft_strcmp(commands[i], "rra"))
 	{
-		rra(a, b);
-		printnumber("rra", *a, *b);
+		rra(&(s->a), &(s->b));
+		printnumber("rra", s->a, s->b, flags);
 	}
 	else if (!ft_strcmp(commands[i], "rrb"))
 	{
-		rrb(a, b);
-		printnumber("rrb", *a, *b);
+		rrb(&(s->a), &(s->b));
+		printnumber("rrb", s->a, s->b, flags);
 	}
 	else if (!ft_strcmp(commands[i], "rrr"))
 	{
-		rrr(a, b);
-		printnumber("rrr", *a, *b);
+		rrr(&(s->a), &(s->b));
+		printnumber("rrr", s->a, s->b, flags);
 	}
 	else if (!ft_strcmp(commands[i], "rr"))
 	{
-		rr(a, b);
-		printnumber("rr", *a, *b);
+		rr(&(s->a), &(s->b));
+		printnumber("rr", s->a, s->b, flags);
 	}
-	usleep(500000);
 	return (0);
 }
 
-static int		apply_commands(t_list **a, t_list **b, char **commands)
+static int		apply_commands(t_stacks *s, char **commands, t_flags *flags)
 {
 	int i;
 	int	ret;
@@ -106,11 +108,11 @@ static int		apply_commands(t_list **a, t_list **b, char **commands)
 	{
 		if (!ft_strcmp(commands[i], "sa"))
 		{
-			sa(a, b);
-			printnumber("sa", *a, *b);
+			sa(&(s->a), &(s->b));
+			printnumber("sa", (s->a), (s->b), flags);
 		}
-		apply_commands3(a, b, commands, i);
-		ret = apply_commands2(a, b, commands, i);
+		apply_commands3(s, commands, i, flags);
+		ret = apply_commands2(s, commands, i, flags);
 		i++;
 	}
 	return (ret);
@@ -119,23 +121,25 @@ static int		apply_commands(t_list **a, t_list **b, char **commands)
 int				main(int argc, char const *argv[])
 {
 	char		**commands;
-	t_list		*a;
-	t_list		*b;
+	t_flags		flags;
+	int			i;
+	t_stacks	s;
 
-	a = NULL;
-	b = NULL;
-	if (ft_check_digits((char **)argv + 1) || argc < 2)
+	s.a = NULL;
+	s.b = NULL;
+	i = check_flags((char **)argv + 1, &flags);
+	if (ft_check_digits((char **)argv + i) || argc < 2)
 		return (1);
-	commands = get_commands_tab();
-	get_list_from_argv(&a, (char **)argv + 1);
-	if (check_double(&a))
+	commands = get_commands_tab(&flags);
+	get_list_from_argv(&s.a, (char **)argv + i);
+	if (check_double(&s.a))
 	{
 		ft_putstr_fd("Error\n", 1);
-		ft_exit(a, b, commands);
+		ft_exit(s.a, s.b, commands, &flags);
 	}
-	if (apply_commands(&a, &b, commands))
-		ft_exit(a, b, commands);
-	check_order(&a, &b);
-	ft_exit(a, b, commands);
+	if (apply_commands(&s, commands, &flags))
+		ft_exit(s.a, s.b, commands, &flags);
+	check_order(&s.a, &s.b, &flags);
+	ft_exit(s.a, s.b, commands, &flags);
 	return (0);
 }

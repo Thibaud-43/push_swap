@@ -73,16 +73,25 @@ int			check_double(t_list **a)
 	return (0);
 }
 
-void		printnumber(char *str, t_list *a, t_list *b)
+void		printnumber(char *str, t_list *a, t_list *b, t_flags *flags)
 {
-	printf("\e[H\e[2J\33[1;34m\n\n     -----------------\n    | COM"
-	"MAND : %5s | \n     -----------------\n\n"
-	"\033[0m%11c  |  %-11c\n         ----------\n", str, 'A', 'B');
+	if (flags->display == 0)
+		return ;
+	printf("\e[H\e[2J");
+	if (flags->color)
+		printf("\33[1;34m\n\n");
+	printf("     -----------------\n    | COM"
+	"MAND : %5s | \n     -----------------\n\n", str);
+	printf("\033[0m");
+	printf("%11c  |  %-11c\n         ----------\n", 'A', 'B');
 	while (a || b)
 	{
 		if (a)
 		{
-			printf("\33[1;35m %11s  \033[0m", (char *)a->content);
+			if (flags->color)
+				printf("\33[1;35m");
+			printf(" %11s", (char *)a->content);
+			printf("  \033[0m");
 			a = a->next;
 		}
 		else
@@ -91,9 +100,13 @@ void		printnumber(char *str, t_list *a, t_list *b)
 		}
 		if (b)
 		{
-			printf("\33[1;33m %-11s\033[0m", (char *)b->content);
+			if (flags->color)
+				printf("\33[1;33m");
+			printf(" %-11s", (char *)b->content);
+			printf("\033[0m");
 			b = b->next;
 		}
 		printf("\n");
 	}
+	usleep(flags->time);
 }

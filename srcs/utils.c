@@ -38,20 +38,27 @@ int				ft_check_digits(char **argv)
 	return (0);
 }
 
-void			ft_exit(t_list *a, t_list *b, char **commands)
+void			ft_exit(t_list *a, t_list *b, char **commands, t_flags *flags)
 {
 	int i;
 	i = 0;
 
-	while (commands[i])
-		free(commands[i++]);
-	free(commands);
+	if (flags->file_redir_dst > 1)
+		close(flags->file_redir_dst);
+	if (flags->file_redir_src > 1)
+		close(flags->file_redir_src);
+	if (commands)
+	{
+		while (commands[i])
+			free(commands[i++]);
+		free(commands);
+	}	
 	freelist(a);
 	freelist(b);
 	exit(1);
 }
 
-char			**get_commands_tab(void)
+char			**get_commands_tab(t_flags *flags)
 {
 	char	*line;
 	char	*commands;
@@ -60,7 +67,7 @@ char			**get_commands_tab(void)
 	char	**commands_tab;
 
 	commands = ft_calloc(sizeof(char), 1);
-	while ((ret = get_next_line(0, &line)))
+	while ((ret = get_next_line(flags->file_redir_src, &line)))
 	{
 		tmp = commands;
 		commands = ft_strjoin(tmp, line);

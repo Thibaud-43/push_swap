@@ -24,11 +24,22 @@
 # define ELEM3 ft_atoi((char*)(*a)->next->next->content)
 
 
+
 typedef struct		s_stacks
 {
 	t_list			*a;
 	t_list			*b;
 }					t_stacks;
+
+typedef	struct		s_flags
+{
+	int			display;
+	int			color;
+	int			file_redir_dst;
+	int			file_redir_src;
+	int			help;
+	int			time;
+}					t_flags;
 
 typedef	struct		s_bigsort
 {
@@ -47,14 +58,14 @@ typedef	struct		s_bigsort
 	int				top;
 }					t_bigsort;
 
-void				check_order(t_list **a, t_list **b);
-void				ft_exit(t_list	*a, t_list *b, char **commands);
+void				check_order(t_list **a, t_list **b, t_flags *flags);
+void				ft_exit(t_list	*a, t_list *b, char **commands, t_flags *flags);
 void				get_list_from_argv(t_list **begin, char	**tab);
-char				**get_commands_tab(void);
+char				**get_commands_tab(t_flags *flags);
 void				freelist(t_list *begin);
-void				sort_three_elem(t_list **a, t_list **b);
-void				sort_fifty_elem(t_list **a, t_list **b);
-void				sort_infinite_elem(t_list **a, t_list **b);
+void				sort_three_elem(t_list **a, t_list **b, t_flags *flags);
+void				sort_fifty_elem(t_list **a, t_list **b, t_flags *flags);
+void				sort_infinite_elem(t_list **a, t_list **b, t_flags *flags);
 int					get_pos_min(t_list **a);
 int					get_pos_max(t_list **a);
 int					get_min(t_list **a, int count);
@@ -72,8 +83,9 @@ void				rr(t_list **a, t_list **b);
 void				rra(t_list **a, t_list **b);
 void				rrb(t_list **a, t_list **b);
 void				rrr(t_list **a, t_list **b);
-void				printnumber(char *str, t_list *a, t_list *b);
-void				push_min_or_max_in_a(t_list **a, t_list **b, t_bigsort *bs);
+void				printnumber(char *str, t_list *a, t_list *b, t_flags *flags);
+void				push_min_or_max_in_a(t_list **a, t_list **b, t_bigsort *, t_flags *flags);
 int					ft_error(void);
+int					check_flags(char **argv, t_flags *flags);
 
 #endif

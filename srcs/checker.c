@@ -19,7 +19,7 @@ void		check_order(t_list **a, t_list **b)
 	tmp = *a;
 	if (*b)
 	{
-		ft_putstr_fd("KO\n", 1);
+		ft_putstr_fd("KO\n", flags->file_redir_dst);
 		return ;
 	}
 	while ((*tmp).next)

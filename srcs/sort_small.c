@@ -12,14 +12,14 @@
 
 #include "sort.h"
 
-void	sort_three_elem2(t_list **a, t_list **b)
+void	sort_three_elem2(t_list **a, t_list **b, t_flags *flags)
 {
 	if (ELEM1 < ELEM2 && ELEM1 < ELEM3 && ELEM2 > ELEM3)
 	{
 		sa(a, b);
-		write(1, "sa\n", 3);
+		write(flags->file_redir_dst, "sa\n", 3);
 		ra(a, b);
-		write(1, "ra\n", 3);
+		write(flags->file_redir_dst, "ra\n", 3);
 		return ;
 	}
 	else
@@ -27,33 +27,33 @@ void	sort_three_elem2(t_list **a, t_list **b)
 		if (!(ELEM1 < ELEM2 && ELEM1 < ELEM3 && ELEM2 < ELEM3))
 		{
 			rra(a, b);
-			write(1, "rra\n", 4);
+			write(flags->file_redir_dst, "rra\n", 4);
 			return ;
 		}
 	}
 }
 
-void	sort_three_elem(t_list **a, t_list **b)
+void	sort_three_elem(t_list **a, t_list **b, t_flags *flags)
 {
 	if (ELEM1 > ELEM2 && ELEM1 < ELEM3 && ELEM2 < ELEM3)
 	{
 		sa(a, b);
-		write(1, "sa\n", 3);
+		write(flags->file_redir_dst, "sa\n", 3);
 		return ;
 	}
 	if (ELEM1 > ELEM2 && ELEM2 > ELEM3 && ELEM1 > ELEM3)
 	{
 		sa(a, b);
-		write(1, "sa\n", 3);
+		write(flags->file_redir_dst, "sa\n", 3);
 		rra(a, b);
-		write(1, "rra\n", 4);
+		write(flags->file_redir_dst, "rra\n", 4);
 		return ;
 	}
 	if (ELEM1 > ELEM2 && ELEM1 > ELEM3 && ELEM2 < ELEM3)
 	{
 		ra(a, b);
-		write(1, "ra\n", 3);
+		write(flags->file_redir_dst, "ra\n", 3);
 		return ;
 	}
-	sort_three_elem2(a, b);
+	sort_three_elem2(a, b, flags);
 }
