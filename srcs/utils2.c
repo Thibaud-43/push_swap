@@ -77,13 +77,18 @@ void		printnumber(char *str, t_list *a, t_list *b, t_flags *flags)
 {
 	if (flags->display == 0)
 		return ;
-	printf("\e[H\e[2J");
+	ft_putstr_fd("\e[H\e[2J", 1);
 	if (flags->color)
-		printf("\33[1;34m\n\n");
-	printf("     -----------------\n    | COM"
-	"MAND : %5s | \n     -----------------\n\n", str);
-	printf("\033[0m");
-	printf("%11c  |  %-11c\n         ----------\n", 'A', 'B');
+		ft_putstr_fd("\33[1;34m\n\n", 1);
+	ft_putstr_fd("     -----------------\n    | COM", 1);
+	ft_putstr_fd("MAND : ", 1);
+	printchar(str, 0, 5);
+	ft_putstr_fd(" | \n     -----------------\n\n", 1);
+	ft_putstr_fd("\033[0m", 1);
+	printchar("A", 0, 11);
+	ft_putstr_fd(" | ", 1);
+	printchar("B", 1, 11);
+	ft_putstr_fd("\n         ----------\n", 1);
 	printnumber2(str, a, b, flags);
 	usleep(flags->time);
 }

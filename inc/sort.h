@@ -89,5 +89,6 @@ int					ft_error(void);
 int					check_flags(char **argv, t_flags *flags);
 void				printnumber2(char *str, t_list *a, t_list *b, t_flags *flags);
 int					check_order2(t_list **a, t_list **b);
+void				printchar(char	*str, int align, int nb);
 
 #endif
