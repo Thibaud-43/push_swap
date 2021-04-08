@@ -41,59 +41,31 @@ void			check_order(t_list **a, t_list **b, t_flags *flags)
 	ft_putstr_fd("OK\n\033[0m", 1);
 }
 
-static void		apply_commands3(t_stacks *s, char **commands,
-int i, t_flags *flags)
-{
-	if (!ft_strcmp(commands[i], "sb"))
-	{
-		sb(&(s->a), &(s->b));
-		printnumber("sb", (s->a), (s->b), flags);
-	}
-	else if (!ft_strcmp(commands[i], "pa"))
-	{
-		pa(&(s->a), &(s->b));
-		printnumber("pa", (s->a), (s->b), flags);
-	}
-	else if (!ft_strcmp(commands[i], "pb"))
-	{
-		pb(&(s->a), &(s->b));
-		printnumber("pb", (s->a), (s->b), flags);
-	}
-	else if (!ft_strcmp(commands[i], "ra"))
-	{
-		ra(&(s->a), &(s->b));
-		printnumber("ra", (s->a), (s->b), flags);
-	}
-	else if (!ft_strcmp(commands[i], "rb"))
-	{
-		rb(&(s->a), &(s->b));
-		printnumber("rb", (s->a), (s->b), flags);
-	}
-}
-
 static int		apply_commands2(t_stacks *s, char **commands,
 int i, t_flags *flags)
 {
-	if (!ft_strcmp(commands[i], "rra"))
-	{
-		rra(&(s->a), &(s->b));
-		printnumber("rra", s->a, s->b, flags);
-	}
+	if (!ft_strcmp(commands[i], "sa"))
+		apply_sa(s, flags);
+	else if (!ft_strcmp(commands[i], "rra"))
+		apply_rra(s, flags);
 	else if (!ft_strcmp(commands[i], "rrb"))
-	{
-		rrb(&(s->a), &(s->b));
-		printnumber("rrb", s->a, s->b, flags);
-	}
+		apply_rrb(s, flags);
 	else if (!ft_strcmp(commands[i], "rrr"))
-	{
-		rrr(&(s->a), &(s->b));
-		printnumber("rrr", s->a, s->b, flags);
-	}
+		apply_rrr(s, flags);
 	else if (!ft_strcmp(commands[i], "rr"))
-	{
-		rr(&(s->a), &(s->b));
-		printnumber("rr", s->a, s->b, flags);
-	}
+		apply_rr(s, flags);
+	else if (!ft_strcmp(commands[i], "sb"))
+		apply_sb(s, flags);
+	else if (!ft_strcmp(commands[i], "pa"))
+		apply_pa(s, flags);
+	else if (!ft_strcmp(commands[i], "pb"))
+		apply_pb(s, flags);
+	else if (!ft_strcmp(commands[i], "ra"))
+		apply_ra(s, flags);
+	else if (!ft_strcmp(commands[i], "rb"))
+		apply_rb(s, flags);
+	else
+		apply_error(s, flags);
 	return (0);
 }
 
@@ -106,12 +78,6 @@ static int		apply_commands(t_stacks *s, char **commands, t_flags *flags)
 	ret = 0;
 	while (commands[i])
 	{
-		if (!ft_strcmp(commands[i], "sa"))
-		{
-			sa(&(s->a), &(s->b));
-			printnumber("sa", (s->a), (s->b), flags);
-		}
-		apply_commands3(s, commands, i, flags);
 		ret = apply_commands2(s, commands, i, flags);
 		i++;
 	}

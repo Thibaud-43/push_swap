@@ -90,5 +90,15 @@ int					check_flags(char **argv, t_flags *flags);
 void				printnumber2(char *str, t_list *a, t_list *b, t_flags *flags);
 int					check_order2(t_list **a, t_list **b);
 void				printchar(char	*str, int align, int nb);
-
+void				apply_sa(t_stacks *s, t_flags *flags);
+void				apply_rra(t_stacks *s, t_flags *flags);
+void				apply_rrb(t_stacks *s, t_flags *flags);
+void				apply_rrr(t_stacks *s, t_flags *flags);
+void				apply_rr(t_stacks *s, t_flags *flags);
+void				apply_sb(t_stacks *s, t_flags *flags);
+void				apply_pa(t_stacks *s, t_flags *flags);
+void				apply_pb(t_stacks *s, t_flags *flags);
+void				apply_ra(t_stacks *s, t_flags *flags);
+void				apply_rb(t_stacks *s, t_flags *flags);
+void				apply_error(t_stacks *s, t_flags *flags);
 #endif

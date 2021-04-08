@@ -1,6 +1,6 @@
-SRCS			= srcs/checker.c srcs/checker_bonus.c srcs/commands.c srcs/push_swap.c srcs/utils.c srcs/utils2.c srcs/commands2.c srcs/commands3.c srcs/sort_small.c srcs/sort_medium.c srcs/sort_big.c srcs/getters.c srcs/sort_big_utils.c srcs/bonus_utils.c srcs/utils3.c
+SRCS			= srcs/checker.c srcs/checker_bonus.c srcs/commands.c srcs/push_swap.c srcs/utils.c srcs/utils2.c srcs/commands2.c srcs/commands3.c srcs/sort_small.c srcs/sort_medium.c srcs/sort_big.c srcs/getters.c srcs/sort_big_utils.c srcs/bonus_utils.c srcs/utils3.c srcs/apply_command1.c srcs/apply_command2.c srcs/apply_command3.c
 
-OBJS_CHECKER	= srcs/checker_bonus.o srcs/commands.o srcs/utils.o srcs/commands2.o srcs/commands3.o srcs/utils2.o srcs/bonus_utils.o srcs/utils3.o
+OBJS_CHECKER	= srcs/checker_bonus.o srcs/commands.o srcs/utils.o srcs/commands2.o srcs/commands3.o srcs/utils2.o srcs/bonus_utils.o srcs/utils3.o srcs/apply_command1.o srcs/apply_command2.o srcs/apply_command3.o
 
 OBJS_PUSHSWAP	= srcs/push_swap.o srcs/commands.o srcs/utils.o srcs/commands2.o srcs/commands3.o srcs/sort_small.o srcs/sort_medium.o srcs/sort_big.o srcs/getters.o srcs/utils2.o srcs/sort_big_utils.o srcs/bonus_utils.o srcs/utils3.o
 

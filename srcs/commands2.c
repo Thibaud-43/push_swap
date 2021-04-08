@@ -57,7 +57,7 @@ void	rra(t_list **a, t_list **b)
 	t_list	*tmp;
 	t_list	*tmp2;
 
-	if (!(*a))
+	if (!(*a) || !(*a)->next)
 		return ;
 	tmp = (*a);
 	while (tmp->next->next)
@@ -74,7 +74,7 @@ void	rrb(t_list **a, t_list **b)
 	t_list	*tmp;
 	t_list	*tmp2;
 
-	if (!(*b))
+	if (!(*b) || !(*b)->next)
 		return ;
 	tmp = (*b);
 	while (tmp->next->next)
