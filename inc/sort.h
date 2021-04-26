@@ -19,11 +19,6 @@
 # include <libft.h>
 # include <time.h>
 # include <limits.h>
-# define ELEM1 ft_atoi((char*)(*a)->content)
-# define ELEM2 ft_atoi((char*)(*a)->next->content)
-# define ELEM3 ft_atoi((char*)(*a)->next->next->content)
-
-
 
 typedef struct		s_stacks
 {
@@ -59,7 +54,8 @@ typedef	struct		s_bigsort
 }					t_bigsort;
 
 void				check_order(t_list **a, t_list **b, t_flags *flags);
-void				ft_exit(t_list	*a, t_list *b, char **commands, t_flags *flags);
+void				ft_exit(t_list	*a, t_list *b,
+										char **commands, t_flags *flags);
 void				get_list_from_argv(t_list **begin, char	**tab);
 char				**get_commands_tab(t_flags *flags);
 void				freelist(t_list *begin);
@@ -83,11 +79,14 @@ void				rr(t_list **a, t_list **b);
 void				rra(t_list **a, t_list **b);
 void				rrb(t_list **a, t_list **b);
 void				rrr(t_list **a, t_list **b);
-void				printnumber(char *str, t_list *a, t_list *b, t_flags *flags);
-void				push_min_or_max_in_a(t_list **a, t_list **b, t_bigsort *, t_flags *flags);
+void				printnumber(char *str, t_list *a,
+											t_list *b, t_flags *flags);
+void				push_min_or_max_in_a(t_list **a, t_list **b,
+								t_bigsort *bs, t_flags *flags);
 int					ft_error(void);
 int					check_flags(char **argv, t_flags *flags);
-void				printnumber2(char *str, t_list *a, t_list *b, t_flags *flags);
+void				printnumber2(char *str, t_list *a,
+											t_list *b, t_flags *flags);
 int					check_order2(t_list **a, t_list **b);
 void				printchar(char	*str, int align, int nb);
 void				apply_sa(t_stacks *s, t_flags *flags);

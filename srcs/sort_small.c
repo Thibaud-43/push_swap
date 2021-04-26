@@ -14,7 +14,12 @@
 
 void	sort_three_elem2(t_list **a, t_list **b, t_flags *flags)
 {
-	if (ELEM1 < ELEM2 && ELEM1 < ELEM3 && ELEM2 > ELEM3)
+	if (ft_atoi((char*)(*a)->content) <
+	ft_atoi((char*)(*a)->next->content)
+	&& ft_atoi((char*)(*a)->content) <
+	(ft_atoi((char*)(*a)->next->next->content))
+	&& ft_atoi((char*)(*a)->next->content) >
+	(ft_atoi((char*)(*a)->next->next->content)))
 	{
 		sa(a, b);
 		write(flags->file_redir_dst, "sa\n", 3);
@@ -22,26 +27,54 @@ void	sort_three_elem2(t_list **a, t_list **b, t_flags *flags)
 		write(flags->file_redir_dst, "ra\n", 3);
 		return ;
 	}
-	else
+	if (!(ft_atoi((char*)(*a)->content) <
+	ft_atoi((char*)(*a)->next->content)
+	&& ft_atoi((char*)(*a)->content) <
+	(ft_atoi((char*)(*a)->next->next->content))
+	&& ft_atoi((char*)(*a)->next->content) <
+	(ft_atoi((char*)(*a)->next->next->content))))
 	{
-		if (!(ELEM1 < ELEM2 && ELEM1 < ELEM3 && ELEM2 < ELEM3))
-		{
-			rra(a, b);
-			write(flags->file_redir_dst, "rra\n", 4);
-			return ;
-		}
+		rra(a, b);
+		write(flags->file_redir_dst, "rra\n", 4);
+		return ;
 	}
+}
+
+void	sort_three_elem3(t_list **a, t_list **b, t_flags *flags)
+{
+	if (ft_atoi((char*)(*a)->content) > ft_atoi((char*)(*a)->next->content)
+	&& ft_atoi((char*)(*a)->content) >
+	(ft_atoi((char*)(*a)->next->next->content))
+	&& ft_atoi((char*)(*a)->next->content) <
+	(ft_atoi((char*)(*a)->next->next->content)))
+	{
+		ra(a, b);
+		write(flags->file_redir_dst, "ra\n", 3);
+		return ;
+	}
+	else
+		sort_three_elem2(a, b, flags);
 }
 
 void	sort_three_elem(t_list **a, t_list **b, t_flags *flags)
 {
-	if (ELEM1 > ELEM2 && ELEM1 < ELEM3 && ELEM2 < ELEM3)
+	if (ft_atoi((char*)(*a)->content) >
+	ft_atoi((char*)(*a)->next->content)
+	&& ft_atoi((char*)(*a)->content) <
+	(ft_atoi((char*)(*a)->next->next->content))
+	&& ft_atoi((char*)(*a)->next->content) <
+	(ft_atoi((char*)(*a)->next->next->content)))
 	{
 		sa(a, b);
 		write(flags->file_redir_dst, "sa\n", 3);
 		return ;
 	}
-	if (ELEM1 > ELEM2 && ELEM2 > ELEM3 && ELEM1 > ELEM3)
+	if (ft_atoi((char*)(*a)->content) >
+	ft_atoi((char*)(*a)->next->content)
+	&& ft_atoi((char*)(*a)->next->content) >
+	(ft_atoi((char*)(*a)->next->next->content))
+	&& ft_atoi((char*)(*a)->content) >
+	(ft_atoi((char*)(*a)->next->next->content)))
 	{
 		sa(a, b);
 		write(flags->file_redir_dst, "sa\n", 3);
@@ -49,11 +82,5 @@ void	sort_three_elem(t_list **a, t_list **b, t_flags *flags)
 		write(flags->file_redir_dst, "rra\n", 4);
 		return ;
 	}
-	if (ELEM1 > ELEM2 && ELEM1 > ELEM3 && ELEM2 < ELEM3)
-	{
-		ra(a, b);
-		write(flags->file_redir_dst, "ra\n", 3);
-		return ;
-	}
-	sort_three_elem2(a, b, flags);
+	sort_three_elem3(a, b, flags);
 }
